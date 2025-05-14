@@ -1,4 +1,4 @@
-module top(
+module tt_top(
     input clk,
     input clr,
     input [31:0] INSTRUCTION_MEM_OUT,
