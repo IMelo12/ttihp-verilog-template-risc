@@ -1,5 +1,6 @@
 module tt_um_top(
     input clk,
+    input ena,
     input clr,
     input [31:0] INSTRUCTION_MEM_OUT,
     input [31:0] RAM_OUT,
