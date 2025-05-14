@@ -1,7 +1,7 @@
 module tt_um_top(
     input clk,
     input ena,
-    input clr,
+    input rst_n,
     input [31:0] INSTRUCTION_MEM_OUT,
     input [31:0] RAM_OUT,
     output [31:0] INSTRUCTION_MEM_IN,
@@ -99,7 +99,7 @@ TWObyONEMUX #(.WIDTH(32)) PCMux(
 
 program_counter PC(
     .clk(clk),
-    .clr(clr),
+    .clr(rst_n),
     .stall(HZD_stall),
     .counter_in(PCMuxOut),
     .count_out(PC_out)
@@ -109,7 +109,7 @@ IFID IFID_reg(
     .instruction_in(INSTRUCTION_MEM_OUT), //need ROM 
     .PC_in(PC_out),
     .clk(clk),
-    .clr(clr),
+    .clr(rst_n),
     .stall(HZD_stall),
     .instruction_out(instruction_ID),
     .PC_out(PC_ID)
@@ -158,7 +158,7 @@ IDEX IDEX_reg(
     .rs2_val(rs2_val_ID),
     .datapath(datapath_ID),
     .clk(clk),
-    .clr(clr),
+    .clr(rst_n),
     .stall(HZD_stall),
     .rs1_out(rs1_EX),
     .rs2_out(rs2_EX),
@@ -259,7 +259,7 @@ EXMEM EXMEM_REG(
     .write_data_out(write_data_MEM),
     .rd_out(rd_MEM),
     .clk(clk),
-    .clr(clr)
+    .clr(rst_n)
 );
 
 
@@ -276,7 +276,7 @@ MEMWB memwbreg(
     .ALU(ALU_MEM),
     .rd(rd_MEM),
     .clk(clk),
-    .clr(clr),
+    .clr(rst_n),
     .ALU_WB_out(ALU_WB),
     .write_enable_out(write_enable_WB),
     .data_out(data_out_WB),
