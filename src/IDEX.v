@@ -68,7 +68,7 @@ always@(posedge clk) begin
         PC_IN_out <= 32'b0;
         //immediate_select_out <= 1'b0;
         immediate_out <= 32'b0;
-        ALU_out <= 4'b0;
+        ALU_out <= 5'b0;
         rd_out <= 5'b0;
         rs1_val_out <= 32'b0;
         rs2_val_out <= 32'b0;
