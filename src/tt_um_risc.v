@@ -61,18 +61,15 @@ risc cpu(
 );
 
 reg [31:0] temp;
-reg [5:0] index_top = 7;
 reg [5:0] index_bot = 0;
 
 always @(posedge clk) begin
     if(!program_we)
     begin
         temp = program_data_out;
-        data_out[index_top:index_bot] <= temp[index_top:index_bot];
-        index_top <= index_top + 8;
+        data_out[index_bot + :8] <= temp[index_bot + :8];
         index_bot <= index_bot + 8;
-        if(index_top == 31) begin
-            index_top <= 7;
+        if(index_top == 24) begin
             index_bot <= 0;
         end
     end
