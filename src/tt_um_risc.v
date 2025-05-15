@@ -66,7 +66,7 @@ risc cpu(
 );
 
 reg [31:0] temp;
-reg [5:0] index_bot = 0;
+reg [2:0] index_bot = 0;
 
 always @(posedge clk) begin
     if(!program_we)
