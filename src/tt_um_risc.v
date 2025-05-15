@@ -16,9 +16,9 @@ wire [31:0] program_address;
 wire [31:0] program_data_out;
 wire [7:0] data_out;
 
-wire instruction_we;
-wire [6:0] instruction_address;
-wire [7:0] instruciton_data;
+wire instruction_we = ui_in[0];
+wire [6:0] instruction_address = ui_in[7:1];
+wire [7:0] instruciton_data = uio_in[7:0];
 wire [31:0] instruciton_data_out;
 
 assign uo_out[0] = data_out[0];
@@ -29,24 +29,6 @@ assign uo_out[4] = data_out[4];
 assign uo_out[5] = data_out[5];
 assign uo_out[6] = data_out[6];
 assign uo_out[7] = data_out[7];
-
-assign ui_in[0] = instruction_we;
-assign ui_in[1] = instruction_address[0];
-assign ui_in[2] = instruction_address[1];
-assign ui_in[3] = instruction_address[2];
-assign ui_in[4] = instruction_address[3];
-assign ui_in[5] = instruction_address[4];
-assign ui_in[6] = instruction_address[5];
-assign ui_in[7] = instruction_address[6];
-
-assign uio_in[0] = instruciton_data[0];
-assign uio_in[1] = instruciton_data[1];
-assign uio_in[2] = instruciton_data[2];
-assign uio_in[3] = instruciton_data[3];
-assign uio_in[4] = instruciton_data[4];
-assign uio_in[5] = instruciton_data[5];
-assign uio_in[6] = instruciton_data[6];
-assign uio_in[7] = instruciton_data[7];
 
 
 top cpu(
