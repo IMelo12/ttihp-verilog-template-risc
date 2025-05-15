@@ -31,7 +31,7 @@ assign uo_out[6] = data_out[6];
 assign uo_out[7] = data_out[7];
 
 
-top cpu(
+risc cpu(
     .clk(clk),
     .rst_n(rst_n),
     .INSTRUCTION_MEM_OUT(instruciton_data_out),
