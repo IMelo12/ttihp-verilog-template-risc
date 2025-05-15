@@ -50,14 +50,14 @@ risc cpu(
 );
 
 
-    RAM #(.DEPTH(32), .WIDTH(8)) instruction_mem(
-    .clk(clk),
-    .write_enable(instruction_we),
-    .data(instruciton_data),
-    .address(INST_ADDR),
-    .data_out(instruciton_data_out)
-);
-
+    multiRAM instRAM(
+        .clk(clk),
+        .we(instruction_we),
+        .PC_add(INST_ADDR),
+        .mem_in(instruction_address),
+        .data_in(instruciton_data),
+        .data_out(instruciton_data_out),
+    )
 
     RAM #(.DEPTH(32), . WIDTH(32)) program_memory( //fix all of this
     .clk(clk),
