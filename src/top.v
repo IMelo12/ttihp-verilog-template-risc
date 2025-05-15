@@ -226,7 +226,7 @@ FOURbyTWOMUX #(.WIDTH(32)) MUX3(
 TWObyONEMUX #(.WIDTH(32)) MUX4(
     .a(mux3_out),
     .b(immediate_EX),
-    .select(immediate_select_EX),
+    .select(datapath_EX[0]),
     .c(ALU_INB)
 );
 
