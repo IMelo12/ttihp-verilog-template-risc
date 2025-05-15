@@ -54,7 +54,7 @@ top cpu(
     .rst_n(rst_n),
     .INSTRUCTION_MEM_OUT(instruciton_data_out),
     .RAM_OUT(program_data_out),
-    .INSTRUCTION_MEM_IN(),
+    .INSTRUCTION_MEM_IN(instruction_data),
     .RAM_IN_DATA(program_data),
     .RAM_IN_ADDRESS(program_address),
     .RAM_IN_WRITE(program_we)
