@@ -31,7 +31,7 @@ project:
     - "defines.v" 
     - "hazardDetection.v" 
     - "instructiondecoder.v" 
-    - "top.v"
+    - "risc.v"
     - "EXMEM.v"   
     - "IDEX.v"            
     - "MEMWB.v"              
