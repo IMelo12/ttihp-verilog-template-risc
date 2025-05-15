@@ -36,7 +36,7 @@ assign uo_out[7] = data_out[7];
 assign uio_out = 0;
 assign uio_oe  = 0;
 
-    wire _unused = &{ena, 1'b1};
+    wire _unused = &{ena, 1'b0};
 
 risc cpu(
     .clk(clk),
