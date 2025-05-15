@@ -22,7 +22,7 @@ wire [4:0] rd_ID;
 wire [4:0] rs1_ID;
 wire [4:0] rs2_ID;
 wire [10:0] datapath_ID;
-wire [3:0] ALU_ID;
+wire [4:0] ALU_ID;
 wire [31:0] imm_ID;
 
 wire [31:0] rs1_val_ID;
@@ -56,7 +56,7 @@ wire MUX_SEL_B;
 wire [31:0] ALU_INA;
 wire [31:0] ALU_INB;
 wire [31:0] ALU_OUT_EX;
-wire [3:0] ALU_control_EX;
+wire [4:0] ALU_control_EX;
 
 wire branch_unit_out_EX;
 
