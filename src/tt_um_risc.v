@@ -14,7 +14,7 @@ wire program_we;
 wire [31:0] program_data;
 wire [31:0] program_address;
 wire [31:0] program_data_out;
-wire [7:0] data_out;
+reg [7:0] data_out;
 
 wire instruction_we = ui_in[0];
 wire [6:0] instruction_address = ui_in[7:1];
