@@ -17,7 +17,7 @@ end
 
 always @(posedge clk) begin
     if(write_enable) 
-        ram_module[address] <= {24'b0,data};
+        ram_module[address] <= {{(32-WIDTH){1'b0)},data};
     else 
         data_out <= ram_module[address];
 end
