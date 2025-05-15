@@ -57,7 +57,7 @@ risc cpu(
         .mem_in(instruction_address),
         .data_in(instruciton_data),
         .data_out(instruciton_data_out),
-    )
+    );
 
     RAM #(.DEPTH(32), . WIDTH(32)) program_memory( //fix all of this
     .clk(clk),
