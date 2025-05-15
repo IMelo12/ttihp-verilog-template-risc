@@ -66,7 +66,7 @@ reg [5:0] index_bot = 0;
 always @(posedge clk) begin
     if(!program_we)
     begin
-        temp = program_data_out;
+        temp <= program_data_out;
         data_out[index_bot +: 8] <= temp[index_bot +: 8];
         index_bot <= index_bot + 8;
         if(index_bot == 24) begin
