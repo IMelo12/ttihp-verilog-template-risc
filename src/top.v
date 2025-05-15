@@ -164,6 +164,7 @@ IDEX IDEX_reg(
     .PC_IN_out(PC_EX),
     .ALU_out(ALU_control_EX),
     .rd_out(rd_EX),
+    .immediate_out(immediate_EX),
     .rs1_val_out(rs1_val_EX),
     .rs2_val_out(rs2_val_EX),
     .datapath_out(datapath_EX),
