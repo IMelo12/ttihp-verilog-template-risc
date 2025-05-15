@@ -1,7 +1,7 @@
 module ALU(
     input [31:0] a,
     input [31:0] b,
-    input [3:0]  select,
+    input [4:0]  select,
 
     output reg [31:0] result
 );
