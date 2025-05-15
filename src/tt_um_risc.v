@@ -66,17 +66,31 @@ risc cpu(
 );
 
 reg [31:0] temp;
-reg [2:0] index_bot = 0;
+reg [1:0] index_bot;  // Only needs to go 0 → 3
+reg       load_temp = 1'b1;
 
 always @(posedge clk) begin
-    if(!program_we)
-    begin
-        temp <= program_data_out;
-        data_out[index_bot +: 8] <= temp[index_bot +: 8];
-        index_bot <= index_bot + 8;
-        if(index_bot == 24) begin
-            index_bot <= 0;
+    if (!program_we) begin
+        if (load_temp) begin
+            temp <= program_data_out;
+            data_out <= program_data_out[7:0];
+            index_bot <= 1;
+            load_temp <= 0;
+        end else begin
+            case (index_bot)
+                1: data_out <= temp[15:8];
+                2: data_out <= temp[23:16];
+                3: begin
+                    data_out <= temp[31:24];
+                    load_temp <= 1;
+                end
+            endcase
+            if (index_bot != 3)
+                index_bot <= index_bot + 1;
         end
+    end else begin
+        load_temp <= 1;
+        index_bot <= 0;
     end
 end
 
