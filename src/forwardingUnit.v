@@ -5,8 +5,8 @@ module forwardingUnit(
     input [4:0] rs2,
     input regWrite_Wb,
     input regWrite_Mem,
-    output reg A,
-    output reg B
+    output reg [1:0] A,
+    output reg [1:0] B
 );
 
 always @(*) begin
