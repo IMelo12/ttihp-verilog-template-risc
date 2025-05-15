@@ -40,13 +40,12 @@ wire [31:0] PC_EX;
 wire [4:0] rd_EX;
 wire [4:0] rs1_EX;
 wire [4:0] rs2_EX;
-wire immediate_select_EX;
 wire [31:0] immediate_EX;
 wire [31:0] rs1_val_EX;
 wire [31:0] rs2_val_EX;
 wire bubble_EX;
 
-wire [10:0] datapath_EX;
+//wire [10:0] datapath_EX;
 wire [31:0] mux1_out;
 wire [31:0] mux3_out;
 wire [31:0] adder1_out;
@@ -247,7 +246,7 @@ EXMEM EXMEM_REG(
     .write_enable(datapath_EX[7]),
     .jump(datapath_EX[10]),
     .bubble(bubble_EX),
-    .program_counter(PC_EX),
+    .program_counter(adder1_out),
     .ALU(ALU_OUT_EX),
     .write_data(mux3_out),
     .rd(rd_EX),
