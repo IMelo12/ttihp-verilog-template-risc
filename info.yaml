@@ -45,34 +45,34 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "instruction_we"
+  ui[1]: "instruction_address[0]"
+  ui[2]: "instruction_address0[1]"
+  ui[3]: "instruction_address0[2]"
+  ui[4]: "instruction_address0[3]"
+  ui[5]: "instruction_address0[4]"
+  ui[6]: "instruction_address0[5]"
+  ui[7]: "instruction_address0[6]"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "data_out[0]"
+  uo[1]: "data_out[1]"
+  uo[2]: "data_out[2]"
+  uo[3]: "data_out[3]"
+  uo[4]: "data_out[4]"
+  uo[5]: "data_out[5]"
+  uo[6]: "data_out[6]"
+  uo[7]: "data_out[7]"
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: "instruciton_data[0]"
+  uio[1]: "instruciton_data[1]"
+  uio[2]: "instruciton_data[2]"
+  uio[3]: "instruciton_data[3]"
+  uio[4]: "instruciton_data[4]"
+  uio[5]: "instruciton_data[5]"
+  uio[6]: "instruciton_data[6]"
+  uio[7]: "instruciton_data[7]"
 
 # Do not change!
 yaml_version: 6
