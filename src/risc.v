@@ -3,7 +3,7 @@ module risc(
     input rst_n,
     input [31:0] INSTRUCTION_MEM_OUT,
     input [31:0] RAM_OUT,
-    output [31:0] INSTRUCTION_MEM_IN,
+    output [7:0] INSTRUCTION_MEM_IN,
     output [31:0] RAM_IN_DATA,
     output [31:0] RAM_IN_ADDRESS,
     output RAM_IN_WRITE
