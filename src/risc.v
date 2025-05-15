@@ -133,16 +133,16 @@ registerFile REGFILE(
     .data_in(ALU_FORWARD_WB),
     .write_enable(write_enable_WB),
     .clk(clk),
-    .rs2(rs2),
+    .rs2(rs2_ID),
     .rs1(rs1_ID),
     .rs1_out(rs1_val_ID),
-    .rs2_out(rs2_val_Id)
+    .rs2_out(rs2_val_ID)
 );
 
 hazardDetection HZD(
     .instrcution(instruction_ID),
     .rd(rd_EX),
-    .memread(mem_read_EX),
+    .memread(datapath_ID[9]),
     .stall(HZD_stall)
 );
 
