@@ -69,7 +69,7 @@ wire bubble_MEM;
 wire [31:0] ALU_MEM;
 wire [31:0] write_data_MEM;
 wire PC_muxSel = MEM_branch | MEM_jump;
-//wire [31:0] ALU_VAL_MEM;
+wire [31:0] ALU_VAL_MEM;
 wire [4:0] rd_MEM;
 wire write_enable_MEM;
 
