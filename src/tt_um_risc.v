@@ -1,0 +1,103 @@
+module tt_um_risc(
+    input  wire [7:0] ui_in,    // Dedicated inputs
+    output wire [7:0] uo_out,   // Dedicated outputs
+    input  wire [7:0] uio_in,   // IOs: Input path
+    output wire [7:0] uio_out,  // IOs: Output path
+    output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
+    input  wire       ena,      // will go high when the design is enabled
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset_n - low to reset
+);
+
+
+wire program_we;
+wire [31:0] program_data;
+wire [31:0] program_address;
+wire [31:0] program_data_out;
+wire [7:0] data_out;
+
+wire instruction_we;
+wire [6:0] instruction_address;
+wire [7:0] instruciton_data;
+wire [31:0] instruciton_data_out;
+
+assign uo_out[0] = data_out[0];
+assign uo_out[1] = data_out[1];
+assign uo_out[2] = data_out[2];
+assign uo_out[3] = data_out[3];
+assign uo_out[4] = data_out[4];
+assign uo_out[5] = data_out[5];
+assign uo_out[6] = data_out[6];
+assign uo_out[7] = data_out[7];
+
+assign ui_in[0] = instruction_we;
+assign ui_in[1] = instruction_address[0];
+assign ui_in[2] = instruction_address[1];
+assign ui_in[3] = instruction_address[2];
+assign ui_in[4] = instruction_address[3];
+assign ui_in[5] = instruction_address[4];
+assign ui_in[6] = instruction_address[5];
+assign ui_in[7] = instruction_address[6];
+
+assign uio_in[0] = instruciton_data[0];
+assign uio_in[1] = instruciton_data[1];
+assign uio_in[2] = instruciton_data[2];
+assign uio_in[3] = instruciton_data[3];
+assign uio_in[4] = instruciton_data[4];
+assign uio_in[5] = instruciton_data[5];
+assign uio_in[6] = instruciton_data[6];
+assign uio_in[7] = instruciton_data[7];
+
+
+top cpu(
+    .clk(clk),
+    .clr(rst_n),
+    .INSTRUCTION_MEM_OUT(instruciton_data_out),
+    .RAM_OUT(program_data_out),
+    .INSTRUCTION_MEM_IN(),
+    .RAM_IN_DATA(program_data),
+    .RAM_IN_ADDRESS(program_address),
+    .RAM_IN_WRITE(program_we)
+);
+
+
+RAM #(.DEPTH(7)) instruction_mem(
+    .clk(clk),
+    .write_enable(instruction_we),
+    .data(instruciton_data),
+    .address(instruction_address),
+    .data_out(instruciton_data_out)
+);
+
+
+RAM #(.DEPTH(32)) program_memory( //fix all of this
+    .clk(clk),
+    .write_enable(program_we),
+    .data(program_data),
+    .address(program_address),
+    .data_out(program_data_out)
+);
+
+reg [31:0] temp;
+reg [5:0] index_top = 7;
+reg [5:0] index_bot = 0;
+
+always @(posedge clk) begin
+    if(!program_we)
+    begin
+        temp = program_data_out;
+        data_out[index_top:index_bot] <= temp[index_top:index_bot];
+        index_top <= index_top + 8;
+        index_bot <= index_bot + 8;
+        if(index_top == 31) begin
+            index_top <= 7;
+            index_bot <= 0;
+        end
+    end
+end
+
+// we need to but the program data in temp reg
+// on every clk cycle -> send 8 bits to data_out
+
+
+endmodule

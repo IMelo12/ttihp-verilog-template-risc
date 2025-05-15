@@ -1,0 +1,25 @@
+module RAM #(parameter DEPTH=10)(
+    input clk,
+    input write_enable,
+    input [31:0] data,
+    input [DEPTH-1:0] address,
+    output reg data_out
+);
+
+
+reg[31:0] ram_module[0:2**DEPTH - 1];
+integer i;
+
+initial begin
+    for(i = 0; i < width; i = i + 1) 
+        ram_module[i] <= 32'b0;
+end
+
+always @(posedge clk) begin
+    if(write_enable) 
+        ram_module[address] <= data;
+    else 
+        data_out <= ram_module[address];
+end
+
+endmodule
