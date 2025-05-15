@@ -12,7 +12,7 @@ module risc(
 // IF STAGE
 wire [31:0] PC_out;
 wire [31:0] PCADD_out;
-wire PCMuxOut;
+wire [31:0] PCMuxOut;
 
 // ID STAGE
 wire HZD_stall;
