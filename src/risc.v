@@ -174,7 +174,7 @@ IDEX IDEX_reg(
 // PC FORWARD 
 TWObyONEMUX #(.WIDTH(32)) MUX1(
     .a(PC_EX),
-    .b(rs1_EX),
+    .b(rs1_val_EX),
     .select(datapath_EX[10]),
     .c(mux1_out)
 );
