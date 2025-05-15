@@ -45,7 +45,7 @@ wire [31:0] rs1_val_EX;
 wire [31:0] rs2_val_EX;
 wire bubble_EX;
 
-//wire [10:0] datapath_EX;
+wire [10:0] datapath_EX;
 wire [31:0] mux1_out;
 wire [31:0] mux3_out;
 wire [31:0] adder1_out;
