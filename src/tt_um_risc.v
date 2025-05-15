@@ -21,6 +21,8 @@ wire [6:0] instruction_address = ui_in[7:1];
 wire [7:0] instruciton_data = uio_in[7:0];
 wire [31:0] instruciton_data_out;
 
+wire [31:0] INST_ADDR;
+
 assign uo_out[0] = data_out[0];
 assign uo_out[1] = data_out[1];
 assign uo_out[2] = data_out[2];
@@ -41,7 +43,7 @@ risc cpu(
     .rst_n(rst_n),
     .INSTRUCTION_MEM_OUT(instruciton_data_out),
     .RAM_OUT(program_data_out),
-    .INSTRUCTION_MEM_IN(instruciton_data),
+    .INST_PC(INST_ADDR),
     .RAM_IN_DATA(program_data),
     .RAM_IN_ADDRESS(program_address),
     .RAM_IN_WRITE(program_we)
@@ -52,7 +54,7 @@ risc cpu(
     .clk(clk),
     .write_enable(instruction_we),
     .data(instruciton_data),
-    .address(instruction_address),
+    .address(INST_ADDR),
     .data_out(instruciton_data_out)
 );
 
