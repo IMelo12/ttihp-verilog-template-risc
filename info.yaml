@@ -45,20 +45,20 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "clk"
-  ui[1]: "clr"
-  ui[2]: "INSTRUCITION_MEM_OUT"
-  ui[3]: "RAM_OUT"
+  ui[0]: ""
+  ui[1]: ""
+  ui[2]: ""
+  ui[3]: ""
   ui[4]: ""
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
 
   # Outputs
-  uo[0]: "INSTRUCTION_MEM_IN"
-  uo[1]: "RAM_IN_DATA"
-  uo[2]: "RAM_IN_ADDRESS"
-  uo[3]: "RAM_IN_WRITE"
+  uo[0]: ""
+  uo[1]: ""
+  uo[2]: ""
+  uo[3]: ""
   uo[4]: ""
   uo[5]: ""
   uo[6]: ""
