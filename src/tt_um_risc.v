@@ -9,7 +9,8 @@ module tt_um_risc(
     input  wire       rst_n     // reset_n - low to reset
 );
 
-assign uio_oe = 8'hFF;
+assign uio_oe = 8'h00;
+    
 wire program_we;
 wire [31:0] program_data;
 wire [31:0] program_address;
@@ -68,8 +69,8 @@ risc cpu(
 );
 
 reg [31:0] temp;
-reg [1:0] index_bot;  // Only needs to go 0 → 3
-reg       load_temp = 1'b1;
+reg [1:0]  index_bot;  // Only needs to go 0 → 3
+reg        load_temp = 1'b1;
 
 always @(posedge clk) begin
     if (!program_we) begin
@@ -95,6 +96,8 @@ always @(posedge clk) begin
         index_bot <= 0;
     end
 end
+
+assign uo_out = data_out;
 
 // we need to but the program data in temp reg
 // on every clk cycle -> send 8 bits to data_out
