@@ -1,4 +1,4 @@
-module tt_um_top(
+module risc(
     input clk,
     input rst_n,
     input [31:0] INSTRUCTION_MEM_OUT,
