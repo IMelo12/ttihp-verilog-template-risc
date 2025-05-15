@@ -51,7 +51,7 @@ assign uio_in[7] = instruciton_data[7];
 
 top cpu(
     .clk(clk),
-    .clr(rst_n),
+    .rst_n(rst_n),
     .INSTRUCTION_MEM_OUT(instruciton_data_out),
     .RAM_OUT(program_data_out),
     .INSTRUCTION_MEM_IN(),
