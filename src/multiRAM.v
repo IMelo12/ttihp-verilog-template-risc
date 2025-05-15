@@ -4,7 +4,7 @@ module multiRAM(
     input [7:0] data_in,
     input we,
     input clk,
-    output [31:0] data_out,
+    output [31:0] data_out
 );
 
 
