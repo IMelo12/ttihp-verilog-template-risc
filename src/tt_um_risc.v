@@ -69,7 +69,7 @@ always @(posedge clk) begin
         temp = program_data_out;
         data_out[index_bot +: 8] <= temp[index_bot +: 8];
         index_bot <= index_bot + 8;
-        if(index_top == 24) begin
+        if(index_bot == 24) begin
             index_bot <= 0;
         end
     end
