@@ -50,8 +50,8 @@ wire [10:0] datapath_EX;
 wire [31:0] mux1_out;
 wire [31:0] mux3_out;
 wire [31:0] adder1_out;
-wire MUX_SEL_A;
-wire MUX_SEL_B;
+wire [1:0] MUX_SEL_A;
+wire [1:0] MUX_SEL_B;
 
 wire [31:0] ALU_INA;
 wire [31:0] ALU_INB;
