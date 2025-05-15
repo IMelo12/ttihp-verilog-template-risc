@@ -44,7 +44,7 @@ always@(posedge clk) begin
         rs1_out <= rs1_out;
         rs2_out <= rs2_out;
         PC_IN_out <= PC_IN_out;
-        immediate_select_out <= immediate_select_out;
+        //immediate_select_out <= immediate_select_out;
         immediate_out <= immediate_out;
         ALU_out <= ALU_out;
         rd_out <= rd_out;
