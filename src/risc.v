@@ -270,7 +270,7 @@ EXMEM EXMEM_REG(
 assign RAM_IN_DATA = write_data_MEM;
 assign RAM_IN_ADDRESS = ALU_VAL_MEM;
 assign RAM_IN_WRITE = memWrite_MEM;
-assign bubble_MEM = 1'b0;
+
 
 MEMWB memwbreg(
     .ALU_WB(ALU_WB_MEM),
