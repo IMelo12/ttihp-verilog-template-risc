@@ -18,10 +18,10 @@ end
 
 always @(posedge clk) begin
     if(we) begin
-        ram_module[mem_in] <= {24'b0,data_in};
+        ram_module[{24'b0,mem_in}] <= {24'b0,data_in};
     end
     else
-        dataout <= ram_module[PC_add];
+        data_out <= ram_module[PC_add];
 end
 
 
