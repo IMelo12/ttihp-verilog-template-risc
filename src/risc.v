@@ -66,7 +66,7 @@ wire MEM_jump;
 wire ALU_WB_MEM;
 wire memWrite_MEM;
 wire bubble_MEM;
-wire [31:0] ALU_MEM;
+//wire [31:0] ALU_MEM;
 wire [31:0] write_data_MEM;
 wire PC_muxSel = MEM_branch | MEM_jump;
 wire [31:0] ALU_VAL_MEM;
@@ -143,7 +143,7 @@ registerFile REGFILE(
 hazardDetection HZD(
     .instrcution(instruction_ID),
     .rd(rd_EX),
-    .memread(datapath_ID[9]),
+    .memread(datapath_EX[9]),
     .stall(HZD_stall)
 );
 
@@ -257,7 +257,7 @@ EXMEM EXMEM_REG(
     .jump_out(MEM_jump),
     .bubble_out(bubble_MEM),
     .program_counter_out(PC_MEM),
-    .ALU_out(ALU_MEM),
+    .ALU_out(ALU_VAL_MEM),
     .write_data_out(write_data_MEM),
     .rd_out(rd_MEM),
     .clk(clk),
@@ -268,14 +268,15 @@ EXMEM EXMEM_REG(
 // MEM STAGE
 
 assign RAM_IN_DATA = write_data_MEM;
-assign RAM_IN_ADDRESS = ALU_MEM;
+assign RAM_IN_ADDRESS = ALU_VAL_MEM;
 assign RAM_IN_WRITE = memWrite_MEM;
+assign bubble_MEM = 1'b0;
 
 MEMWB memwbreg(
     .ALU_WB(ALU_WB_MEM),
     .write_enable(write_enable_MEM),
     .data(RAM_OUT),
-    .ALU(ALU_MEM),
+    .ALU(ALU_VAL_MEM),
     .rd(rd_MEM),
     .clk(clk),
     .clr(rst_n),
