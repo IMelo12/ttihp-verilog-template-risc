@@ -5,7 +5,7 @@ module immediateGenerator(
 
 wire [31:0] I_type = { {20{inst[31]}}, inst[31:20] };
 wire [31:0] S_type = { {20{inst[31]}}, inst[31:25], inst[11:7] };
-wire [31:0] B_type = { {20{inst[31]}}, inst[7], inst[30:25], inst[11:8]};
+wire [31:0] B_type = { {20{inst[31]}}, inst[7], inst[30:25], inst[11:8],1'b0};
 wire [31:0] U_type = { {12{inst[31]}}, inst[31:12]};
 wire [31:0] J_type = { {12{inst[31]}}, inst[31], inst[19:12],inst[20],inst[30:21]};
 
