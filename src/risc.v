@@ -188,7 +188,7 @@ adder #(.WIDTH(32)) adder1(
 branch branch_unit(
     .A(ALU_INA),
     .B(rs2_val_EX),
-    .Unsigned(unsign_EX),
+    .Unsigned(datapath_EX[6]),
     .select(datapath_EX[5:2]),
     .branch_out(branch_unit_out_EX)
 );
@@ -240,7 +240,7 @@ ALU ALU_EX(
 
 EXMEM EXMEM_REG(
     .branch(branch_unit_out_EX),
-    .ALU_WB(ALU_WB_EX),
+    .ALU_WB(datapath_EX[8]),
     .mem_write(datapath_EX[1]),
     .write_enable(datapath_EX[7]),
     .jump(datapath_EX[10]),
