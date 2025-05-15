@@ -50,7 +50,7 @@ risc cpu(
 );
 
 
-    RAM #(.DEPTH(7), .WIDTH(8)) instruction_mem(
+    RAM #(.DEPTH(32), .WIDTH(8)) instruction_mem(
     .clk(clk),
     .write_enable(instruction_we),
     .data(instruciton_data),
