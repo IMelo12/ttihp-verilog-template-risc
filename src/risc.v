@@ -104,6 +104,8 @@ program_counter PC(
     .count_out(PC_out)
 );
 
+assign INSTRUCTION_MEM_IN = PC_out;
+
 IFID IFID_reg(
     .instruction_in(INSTRUCTION_MEM_OUT), //need ROM 
     .PC_in(PC_out),
