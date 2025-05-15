@@ -11,7 +11,7 @@ reg[31:0] ram_module[0:2**DEPTH - 1];
 integer i;
 
 initial begin
-    for(i = 0; i < width; i = i + 1) 
+    for(i = 0; i < DEPTH; i = i + 1) 
         ram_module[i] <= 32'b0;
 end
 
