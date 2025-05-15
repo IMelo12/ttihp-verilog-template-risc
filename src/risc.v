@@ -3,7 +3,7 @@ module risc(
     input rst_n,
     input [31:0] INSTRUCTION_MEM_OUT,
     input [31:0] RAM_OUT,
-    output [7:0] INSTRUCTION_MEM_IN,
+    output [31:0] INST_PC,
     output [31:0] RAM_IN_DATA,
     output [31:0] RAM_IN_ADDRESS,
     output RAM_IN_WRITE
@@ -11,6 +11,7 @@ module risc(
 
 // IF STAGE
 wire [31:0] PC_out;
+assign INST_PC = PC_out;
 wire [31:0] PCADD_out;
 wire [31:0] PCMuxOut;
 
