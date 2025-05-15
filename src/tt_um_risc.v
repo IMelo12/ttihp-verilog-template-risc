@@ -9,7 +9,7 @@ module tt_um_risc(
     input  wire       rst_n     // reset_n - low to reset
 );
 
-
+assign uio_oe = 8'hFF;
 wire program_we;
 wire [31:0] program_data;
 wire [31:0] program_address;
