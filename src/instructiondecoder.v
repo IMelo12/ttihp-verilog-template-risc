@@ -147,7 +147,6 @@ always @(*) begin
                                 `funct7_sra: ALU_control <= `ALU_sra;
                             endcase
                         end
-                    `funct3_sra:  ALU_control <= `ALU_sra;
                     `funct3_slt:  ALU_control <= `ALU_slt;
                     `funct3_sltu: ALU_control <= `ALU_sltu;
                 endcase
