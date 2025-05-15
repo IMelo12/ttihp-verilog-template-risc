@@ -3,7 +3,7 @@ module RAM #(parameter DEPTH=10)(
     input write_enable,
     input [31:0] data,
     input [DEPTH-1:0] address,
-    output reg data_out
+    output reg [31:0] data_out
 );
 
 
