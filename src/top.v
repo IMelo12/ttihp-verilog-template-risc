@@ -166,7 +166,7 @@ IDEX IDEX_reg(
     .rd_out(rd_EX),
     .rs1_val_out(rs1_val_EX),
     .rs2_val_out(rs2_val_EX),
-    .datapath_out(datapath_EX)
+    .datapath_out(datapath_EX),
     .bubble(bubble_EX)
 );
 
