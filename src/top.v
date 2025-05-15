@@ -167,6 +167,7 @@ IDEX IDEX_reg(
     .rs1_val_out(rs1_val_EX),
     .rs2_val_out(rs2_val_EX),
     .datapath_out(datapath_EX)
+    .bubble(bubble_EX)
 );
 
 // PC FORWARD 
