@@ -14,7 +14,7 @@ module instructiondecoder(
     //output jump,
 
     output reg [10:0] datapath,
-    output reg [3:0] ALU_control
+    output reg [4:0] ALU_control
 );
 
 reg [6:0] opcode;
