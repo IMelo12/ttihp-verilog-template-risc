@@ -9,7 +9,7 @@ module IDEX(
     input [4:0]rs1,
     input [4:0]rs2,
     input [31:0]PC_IN,
-    //input immediate_select,
+    input immediate_select,
     input [31:0]immediate,
     input [3:0]ALU_control,
     input [4:0]rd,
