@@ -41,7 +41,7 @@ assign uio_oe  = 0;
 
 
 
-risc cpu(
+    (* dont_touch = "true" *) risc cpu(
     .clk(clk),
     .rst_n(rst_n),
     .INSTRUCTION_MEM_OUT(instruciton_data_out),
@@ -53,7 +53,7 @@ risc cpu(
 );
 
 
-    multiRAM instRAM(
+    (* dont_touch = "true" *)multiRAM instRAM(
         .clk(clk),
         .we(instruction_we),
         .PC_add(INST_ADDR),
@@ -62,7 +62,7 @@ risc cpu(
         .data_out(instruciton_data_out)
     );
 
-    RAM #(.DEPTH(32), .WIDTH(32)) program_memory( //fix all of this
+    (* dont_touch = "true" *)RAM #(.DEPTH(32), .WIDTH(32)) program_memory( //fix all of this
     .clk(clk),
     .write_enable(program_we),
     .data(program_data),
