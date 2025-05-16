@@ -102,7 +102,7 @@ assign uo_out = data_out;
 // we need to but the program data in temp reg
 // on every clk cycle -> send 8 bits to data_out
 
-wire _unused = &{ena, 1'b0};
+wire _unused = &{uio_in[7:0],ui_in[7:0],clk,rst_n,ena, 6'b0};
 
 
 endmodule
