@@ -1,20 +1,18 @@
 module tt_um_risc(
     input  wire [7:0] ui_in,    // Dedicated inputs
-    output wire [7:0] uo_out,   // Dedicated outputs
+    output wire [7:0] uo_out,   // Kept as wire
     input  wire [7:0] uio_in,   // IOs: Input path
     output wire [7:0] uio_out,  // IOs: Output path
-    output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
-    input  wire       ena,      // will go high when the design is enabled
-    input  wire       clk,      // clock
-    input  wire       rst_n     // reset_n - low to reset
+    output wire [7:0] uio_oe,   // IOs: Enable path (1=output)
+    input  wire       ena,      // Enable signal
+    input  wire       clk,      // Clock
+    input  wire       rst_n     // Active-low reset
 );
 
-assign uio_oe = 8'h00;              // Enable all IO outputs
+// Enable output on all uio pins
+assign uio_oe = 8'hFF;
+
 wire [7:0] risc_output;
-
-assign uio_out = risc_output;       // Drive RISC output to uio_out
-assign uo_out = risc_output;        // Also map it to uo_out
-
 wire input_we = ui_in[0];
 wire [6:0] input_address = ui_in[7:1];
 wire [7:0] input_data = uio_in;
@@ -28,19 +26,12 @@ wire [7:0] input_data = uio_in;
     .memory_out(risc_output)
 );
 
-//wire _unused = &{ena, 1'b0};
+// Drive risc output to uio and uo
+assign uio_out = risc_output;
 
-    always @(posedge clk or negedge rst_n) begin
-        if(rst_n) begin
-            uo_out = 1'b0;
-        end
-        else if(ena) begin
-            if(ui_in == 7'b1) begin
-                uo_out = 1'b1;
-            end
-        end
-    end
-    
-        
+// Example control: override output if ui_in == 8'b00000001 and ena is high
+assign uo_out = (!rst_n)            ? 8'b0 :
+                (ena && ui_in == 8'b00000001) ? 8'b1 :
+                risc_output;
 
 endmodule
