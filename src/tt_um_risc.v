@@ -12,6 +12,7 @@ module tt_um_risc(
 );
 
 assign uio_oe = 8'h00;
+assign uio_out = 0;
 
 wire input_we = ui_in[0];
 wire [6:0] input_address = ui_in[7:1];
