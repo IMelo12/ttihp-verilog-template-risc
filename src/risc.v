@@ -130,7 +130,7 @@ immediateGenerator immgen(
     .immediate(imm_ID)
 );
 
-registerFIle REGFILE(
+registerFile REGFILE(
     .select(rd_WB),
     .data_in(ALU_FORWARD_WB),
     .write_enable(write_enable_WB),
