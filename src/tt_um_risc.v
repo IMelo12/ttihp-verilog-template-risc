@@ -22,7 +22,7 @@ wire [7:0] input_data = uio_in;
     .rst_n(rst_n),
     .inst_address(input_address),
     .inst_data(input_data),
-    .ints_we(input_we),
+    .inst_we(input_we),
     .memory_out(uo_out)
 );
 
