@@ -12,99 +12,21 @@ module tt_um_risc(
 );
 
 assign uio_oe = 8'h00;
-    
-wire program_we;
-wire [31:0] program_data;
-wire [31:0] program_address;
-wire [31:0] program_data_out;
-reg [7:0] data_out;
 
-wire instruction_we = ui_in[0];
-wire [6:0] instruction_address = ui_in[7:1];
-wire [7:0] instruciton_data = uio_in;
-wire [31:0] instruciton_data_out;
+wire input_we = ui_in[0];
+wire [6:0] input_address = ui_in[7:1];
+wire [7:0] input_data = uio_in;
 
-wire [31:0] INST_ADDR;
-
-assign uo_out[0] = data_out[0];
-assign uo_out[1] = data_out[1];
-assign uo_out[2] = data_out[2];
-assign uo_out[3] = data_out[3];
-assign uo_out[4] = data_out[4];
-assign uo_out[5] = data_out[5];
-assign uo_out[6] = data_out[6];
-assign uo_out[7] = data_out[7];
-
-//unused 
-assign uio_out = 0;
-assign uio_oe  = 0;
-
-
-
-    (* dont_touch = "true" *) risc cpu(
+(* dont_touch = "true" *) risc cpu(
     .clk(clk),
     .rst_n(rst_n),
-    .INSTRUCTION_MEM_OUT(instruciton_data_out),
-    .RAM_OUT(program_data_out),
-    .INST_PC(INST_ADDR),
-    .RAM_IN_DATA(program_data),
-    .RAM_IN_ADDRESS(program_address),
-    .RAM_IN_WRITE(program_we)
+    .inst_address(input_address),
+    .inst_data(input_data),
+    .ints_we(input_we),
+    .memory_out(uo_out)
 );
 
-
-    (* dont_touch = "true" *)multiRAM instRAM(
-        .clk(clk),
-        .we(instruction_we),
-        .PC_add(INST_ADDR),
-        .mem_in(instruction_address),
-        .data_in(instruciton_data),
-        .data_out(instruciton_data_out)
-    );
-
-    (* dont_touch = "true" *)RAM #(.DEPTH(32), .WIDTH(32)) program_memory( //fix all of this
-    .clk(clk),
-    .write_enable(program_we),
-    .data(program_data),
-    .address(program_address),
-    .data_out(program_data_out)
-);
-
-reg [31:0] temp;
-reg [1:0]  index_bot;  // Only needs to go 0 → 3
-reg        load_temp = 1'b1;
-
-always @(posedge clk) begin
-    if (!program_we) begin
-        if (load_temp) begin
-            temp <= program_data_out;
-            data_out <= program_data_out[7:0];
-            index_bot <= 1;
-            load_temp <= 0;
-        end else begin
-            case (index_bot)
-                1: data_out <= temp[15:8];
-                2: data_out <= temp[23:16];
-                3: begin
-                    data_out <= temp[31:24];
-                    load_temp <= 1;
-                end
-            endcase
-            if (index_bot != 3)
-                index_bot <= index_bot + 1;
-        end
-    end else begin
-        load_temp <= 1;
-        index_bot <= 0;
-    end
-end
-
-assign uo_out = data_out;
-
-// we need to but the program data in temp reg
-// on every clk cycle -> send 8 bits to data_out
 
 wire _unused = &{ena, 1'b0};
-
 
 endmodule
