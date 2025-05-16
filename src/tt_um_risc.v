@@ -21,7 +21,7 @@ reg [7:0] data_out;
 
 wire instruction_we = ui_in[0];
 wire [6:0] instruction_address = ui_in[7:1];
-wire [7:0] instruciton_data = uio_in[7:0];
+wire [7:0] instruciton_data = uio_in;
 wire [31:0] instruciton_data_out;
 
 wire [31:0] INST_ADDR;
