@@ -1,5 +1,3 @@
-
-
 module tt_um_risc(
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -11,8 +9,11 @@ module tt_um_risc(
     input  wire       rst_n     // reset_n - low to reset
 );
 
-assign uio_oe = 8'h00;
-assign uio_out = 0;
+assign uio_oe = 8'hFF;              // Enable all IO outputs
+wire [7:0] risc_output;
+
+assign uio_out = risc_output;       // Drive RISC output to uio_out
+assign uo_out = risc_output;        // Also map it to uo_out
 
 wire input_we = ui_in[0];
 wire [6:0] input_address = ui_in[7:1];
@@ -24,9 +25,8 @@ wire [7:0] input_data = uio_in;
     .inst_address(input_address),
     .inst_data(input_data),
     .inst_we(input_we),
-    .memory_out(uo_out)
+    .memory_out(risc_output)
 );
-
 
 wire _unused = &{ena, 1'b0};
 
