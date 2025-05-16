@@ -1,4 +1,4 @@
-//`default_nettype none
+
 
 module tt_um_risc(
     input  wire [7:0] ui_in,    // Dedicated inputs
@@ -18,7 +18,7 @@ wire input_we = ui_in[0];
 wire [6:0] input_address = ui_in[7:1];
 wire [7:0] input_data = uio_in;
 
-(* keep *) risc cpu(
+(* dont_touch = "true" *) risc cpu(
     .clk(clk),
     .rst_n(rst_n),
     .inst_address(input_address),
@@ -28,6 +28,6 @@ wire [7:0] input_data = uio_in;
 );
 
 
-(* keep *) wire _unused = &{ena, 1'b0};
+wire _unused = &{ena, 1'b0};
 
 endmodule
