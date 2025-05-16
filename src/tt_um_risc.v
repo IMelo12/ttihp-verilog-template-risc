@@ -12,22 +12,21 @@ module tt_um_risc(
 );
 
 assign uio_oe = 8'h00;
-assign uio_out = 0;
 
 wire input_we = ui_in[0];
 wire [6:0] input_address = ui_in[7:1];
 wire [7:0] input_data = uio_in;
 
-(* dont_touch = "true" *) risc cpu(
+(* keep *) risc cpu(
     .clk(clk),
     .rst_n(rst_n),
     .inst_address(input_address),
     .inst_data(input_data),
-    .inst_we(input_we),
+    .ints_we(input_we),
     .memory_out(uo_out)
 );
 
 
-wire _unused = &{ena, 1'b0};
+(* keep *) wire _unused = &{ena, 1'b0};
 
 endmodule
