@@ -3,7 +3,7 @@ module risc(
     input rst_n,
     input [6:0] inst_address,
     input [7:0] inst_data,
-    input inst_we,
+    input ints_we,
     output [7:0] memory_out
 );
 
@@ -74,20 +74,20 @@ wire write_enable_WB;
 wire [31:0] data_out_WB;
 
 
-(* dont_touch = "true" *) adder PC_add(
+(* keep *) adder PC_add(
     .a(PC_out),
     .b(32'b01),
     .y(PCADD_out)
 );
 
-(* dont_touch = "true" *)TWObyONEMUX #(.WIDTH(32)) PCMux(
+(* keep *) TWObyONEMUX #(.WIDTH(32)) PCMux(
     .a(PCADD_out),
     .b(PC_MEM),
     .select(PC_muxSel),
     .c(PCMuxOut)
 );
 
-(* dont_touch = "true" *) program_counter PC(
+(* keep *) program_counter PC(
     .clk(clk),
     .clr(rst_n),
     .stall(HZD_stall),
@@ -95,7 +95,7 @@ wire [31:0] data_out_WB;
     .count_out(PC_out)
 );
 
-(* dont_touch = "true" *) multiRAM progRAM(
+(* keep *) multiRAM progRAM(
     .clk(clk),
     .we(inst_we),
     .PC_add(PC_out),
@@ -105,7 +105,7 @@ wire [31:0] data_out_WB;
 );
 //assign INSTRUCTION_MEM_IN = PC_out;
 
-(* dont_touch = "true" *) IFID IFID_reg(
+(* keep *) IFID IFID_reg(
     .instruction_in(inst_memory_IF), //need ROM 
     .PC_in(PC_out),
     .clk(clk),
@@ -115,7 +115,7 @@ wire [31:0] data_out_WB;
     .PC_out(PC_ID)
 );
 
-(* dont_touch = "true" *) instructiondecoder Decoder(
+(* keep *) instructiondecoder Decoder(
     .instruction(instruction_ID),
     .rd(rd_ID),
     .rs1(rs1_ID),
@@ -124,12 +124,12 @@ wire [31:0] data_out_WB;
     .ALU_control(ALU_ID)
 );
 
-(* dont_touch = "true" *)immediateGenerator immgen(
+(* keep *)immediateGenerator immgen(
     .inst(instruction_ID),
     .immediate(imm_ID)
 );
 
-(* dont_touch = "true" *) registerFile REGFILE(
+(* keep *) registerFile REGFILE(
     .select(rd_WB),
     .data_in(ALU_FORWARD_WB),
     .write_enable(write_enable_WB),
@@ -140,14 +140,14 @@ wire [31:0] data_out_WB;
     .rs2_out(rs2_val_ID)
 );
 
-(* dont_touch = "true" *)hazardDetection HZD(
+(* keep *) hazardDetection HZD(
     .instrcution(instruction_ID),
     .rd(rd_EX),
     .memread(datapath_EX[9]),
     .stall(HZD_stall)
 );
 
-(* dont_touch = "true" *) IDEX IDEX_reg(
+(* keep *) IDEX IDEX_reg(
     .rs1(rs1_ID),
     .rs2(rs2_ID),
     .PC_IN(PC_ID),
@@ -173,20 +173,20 @@ wire [31:0] data_out_WB;
 );
 
 // PC FORWARD 
-(* dont_touch = "true" *)TWObyONEMUX #(.WIDTH(32)) MUX1(
+(* keep *)TWObyONEMUX #(.WIDTH(32)) MUX1(
     .a(PC_EX),
     .b(rs1_val_EX),
     .select(datapath_EX[10]),
     .c(mux1_out)
 );
 
-(* dont_touch = "true" *) adder #(.WIDTH(32)) adder1(
+(* keep *) adder #(.WIDTH(32)) adder1(
     .a(mux1_out),
     .b(PC_EX),
     .y(adder1_out)
 );
 
-(* dont_touch = "true" *)branch branch_unit(
+(* keep *) branch branch_unit(
     .A(ALU_INA),
     .B(rs2_val_EX),
     .Unsigned(datapath_EX[6]),
@@ -196,7 +196,7 @@ wire [31:0] data_out_WB;
 
 // ALU AND FORWARDING
 
-(* dont_touch = "true" *) forwardingUnit forward(
+(* keep *) forwardingUnit forward(
     .rs1(rs1_EX),
     .rs2(rs2_EX),
     .rdmem(rd_MEM),
@@ -207,7 +207,7 @@ wire [31:0] data_out_WB;
     .B(MUX_SEL_B)
 );
 
-(* dont_touch = "true" *) FOURbyTWOMUX #(.WIDTH(32))MUX2(
+(* keep *) FOURbyTWOMUX #(.WIDTH(32))MUX2(
     .a(rs1_val_EX),
     .b(ALU_FORWARD_WB),
     .c(ALU_VAL_MEM),
@@ -216,7 +216,7 @@ wire [31:0] data_out_WB;
     .e(ALU_INA)
 );
 
-(* dont_touch = "true" *) FOURbyTWOMUX #(.WIDTH(32)) MUX3(
+(* keep *) FOURbyTWOMUX #(.WIDTH(32)) MUX3(
     .a(rs2_val_EX),
     .b(ALU_FORWARD_WB),
     .c(ALU_VAL_MEM),
@@ -225,21 +225,21 @@ wire [31:0] data_out_WB;
     .e(mux3_out)
 );
 
-(* dont_touch = "true" *) TWObyONEMUX #(.WIDTH(32)) MUX4(
+(* keep *) TWObyONEMUX #(.WIDTH(32)) MUX4(
     .a(mux3_out),
     .b(immediate_EX),
     .select(datapath_EX[0]),
     .c(ALU_INB)
 );
 
-(* dont_touch = "true" *) ALU ALU_EX(
+(* keep *) ALU ALU_EX(
     .a(ALU_INA),
     .b(ALU_INB),
     .select(ALU_control_EX),
     .result(ALU_OUT_EX)
 );
 
-(* dont_touch = "true" *) EXMEM EXMEM_REG(
+(* keep *) EXMEM EXMEM_REG(
     .branch(branch_unit_out_EX),
     .ALU_WB(datapath_EX[8]),
     .mem_write(datapath_EX[1]),
@@ -268,7 +268,7 @@ wire [31:0] data_out_WB;
 // MEM STAGE
 
 
-(* dont_touch = "true" *) RAM #(.DEPTH(32), .WIDTH(32)) mainMEM(
+(* keep *) RAM #(.DEPTH(32), .WIDTH(32)) mainMEM(
     .clk(clk),
     .write_enable(memWrite_MEM),
     .data(write_data_MEM),
@@ -279,7 +279,7 @@ wire [31:0] data_out_WB;
 assign memory_out = memory_MEM[7:0];
 
 
-(* dont_touch = "true" *) MEMWB memwbreg(
+(* keep *) MEMWB memwbreg(
     .ALU_WB(ALU_WB_MEM),
     .write_enable(write_enable_MEM),
     .data(memory_MEM),
@@ -294,7 +294,7 @@ assign memory_out = memory_MEM[7:0];
     .rd_out(rd_WB)
 );
 
-(* dont_touch = "true" *) TWObyONEMUX #(.WIDTH(32)) WBMUX(
+(* keep *) TWObyONEMUX #(.WIDTH(32)) WBMUX(
     .a(data_out_WB),
     .b(ALU_DATA_WB),
     .select(ALU_WB),
