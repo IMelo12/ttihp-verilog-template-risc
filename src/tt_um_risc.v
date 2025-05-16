@@ -1,3 +1,5 @@
+`define KEEP_UNUSED
+
 module tt_um_risc(
     input  wire [7:0] ui_in,     // Dedicated inputs
     output wire [7:0] uo_out,    // Dedicated outputs (wire)
@@ -35,5 +37,29 @@ assign uo_out = (!rst_n) ? 8'b0 : masked_output;
 
 // (Optional) If you want to drive uio_out too, do something like this:
 // assign uio_out = risc_output;  // only if uio_oe = 0xFF
+
+
+`ifdef KEEP_UNUSED
+
+// Dummy instantiations to prevent Yosys from pruning unused modules
+ALU _dummy_ALU();
+registerFile _dummy_registerFile();
+instructiondecoder _dummy_decoder();
+hazardDetection _dummy_hazard();
+immediateGenerator _dummy_immgen();
+forwardingUnit _dummy_forwarding();
+branch _dummy_branch();
+adder _dummy_adder();
+IFID _dummy_ifid();
+IDEX _dummy_idex();
+EXMEM _dummy_exmem();
+MEMWB _dummy_memwb();
+multiRAM _dummy_multiram();
+program_counter _dummy_pc();
+FOURbyTWOMUX #(.WIDTH(32)) _dummy_mux4x2();
+TWObyONEMUX #(.WIDTH(32)) _dummy_mux2x1();
+RAM _dummy_ram();
+
+`endif
 
 endmodule
