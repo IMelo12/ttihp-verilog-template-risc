@@ -1,3 +1,5 @@
+`default_nettype none
+
 module tt_um_risc(
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -102,7 +104,7 @@ assign uo_out = data_out;
 // we need to but the program data in temp reg
 // on every clk cycle -> send 8 bits to data_out
 
-wire _unused = &{uio_in[7:0],ui_in[7:0],clk,rst_n,ena, 6'b0};
+wire _unused = &{uio_in[7:0],ui_in[7:0],clk,rst_n,ena, 5'b0};
 
 
 endmodule
