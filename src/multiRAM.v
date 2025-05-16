@@ -1,6 +1,28 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 05/16/2025 12:32:47 AM
+// Design Name: 
+// Module Name: multiRAM
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module multiRAM(
     input [31:0] PC_add,
-    input [7:0] mem_in,
+    input [6:0] mem_in,
     input [7:0] data_in,
     input we,
     input clk,
@@ -18,7 +40,7 @@ end
 
 always @(posedge clk) begin
     if(we) begin
-        ram_module[{24'b0,mem_in}] <= {24'b0,data_in};
+        ram_module[{25'b0,mem_in}] <= {24'b0,data_in};
     end
     else
         data_out <= ram_module[PC_add];
