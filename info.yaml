@@ -23,7 +23,7 @@ project:
     - "program_counter.v"
     - "ALU.v"           
     - "immediateGenerator.v" 
-    - "registerFIle.v"
+    - "registerFile.v"
     - "branch.v"  
     - "FOURbyTWOMUX.v"    
     - "defines.v" 
