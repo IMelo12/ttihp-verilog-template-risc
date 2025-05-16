@@ -3,7 +3,7 @@ module risc(
     input rst_n,
     input [6:0] inst_address,
     input [7:0] inst_data,
-    input ints_we,
+    input inst_we,
     output [7:0] memory_out
 );
 
