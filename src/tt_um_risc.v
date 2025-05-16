@@ -32,11 +32,11 @@ wire [7:0] input_data = uio_in;
 
     always @(posedge clk or negedge rst_n) begin
         if(rst_n) begin
-            uo_out <= 1'b0;
+            uo_out = 1'b0;
         end
         else if(ena) begin
             if(ui_in == 7'b1) begin
-                uo_out <= 1'b1;
+                uo_out = 1'b1;
             end
         end
     end
