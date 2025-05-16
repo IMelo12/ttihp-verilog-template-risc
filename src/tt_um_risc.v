@@ -9,7 +9,7 @@ module tt_um_risc(
     input  wire       rst_n     // reset_n - low to reset
 );
 
-assign uio_oe = 8'hFF;              // Enable all IO outputs
+assign uio_oe = 8'h00;              // Enable all IO outputs
 wire [7:0] risc_output;
 
 assign uio_out = risc_output;       // Drive RISC output to uio_out
@@ -29,5 +29,16 @@ wire [7:0] input_data = uio_in;
 );
 
 wire _unused = &{ena, 1'b0};
+
+    always @(posedge clk or negedge rst_n) begin
+        if(rst_n) begin
+            uo_out <= 1'b0;
+        end
+        else if(ena) begin
+            uo_out <= 1'b1;
+        end
+    end
+    
+        
 
 endmodule
