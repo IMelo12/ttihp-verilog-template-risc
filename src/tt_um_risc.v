@@ -10,6 +10,7 @@ module tt_um_risc(
 );
 
 assign uio_oe = 8'h00;            // Set uio as inputs (OE = 0)
+assign uio_out = 0;
 
 wire [7:0] risc_output;
 wire       input_we = ui_in[0];
