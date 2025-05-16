@@ -27,7 +27,6 @@ project:
     - "registerFIle.v"
     - "branch.v"  
     - "FOURbyTWOMUX.v"    
-    - "signextend.v"
     - "defines.v" 
     - "hazardDetection.v" 
     - "instructiondecoder.v" 
