@@ -18,6 +18,7 @@ wire [7:0] risc_output;
 wire       input_we = ui_in[0];
 wire [6:0] input_address = ui_in[7:1];
 wire [7:0] input_data = uio_in;
+wire [7:0] debug_wire;
 
 (* dont_touch = "true" *) risc cpu (
     .clk(clk),
@@ -25,15 +26,15 @@ wire [7:0] input_data = uio_in;
     .inst_address(input_address),
     .inst_data(input_data),
     .inst_we(input_we),
-    .memory_out(risc_output)
+    .memory_out(risc_output),
+    .debug(debug_wire)
 );
 
 // Masked output: conditionally override risc_output if ena & ui_in match
-wire [7:0] masked_output;
-assign masked_output = (ena && ui_in == 8'b00000001) ? 8'b1 : risc_output;
+
 
 // Output logic ensuring risc_output is always referenced
-assign uo_out = (!rst_n) ? 8'b0 : masked_output;
+assign uo_out = (debug_wire ^ risc_output) ? risc_output:debug_wire;
 
 // (Optional) If you want to drive uio_out too, do something like this:
 // assign uio_out = risc_output;  // only if uio_oe = 0xFF
