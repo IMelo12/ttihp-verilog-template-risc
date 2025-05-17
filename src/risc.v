@@ -4,8 +4,13 @@ module risc(
     input [6:0] inst_address,
     input [7:0] inst_data,
     input inst_we,
-    output [7:0] memory_out
+    output [7:0] memory_out,
+    output [7:0] debug
 );
+
+//debug 
+wire [7:0] debug_bus;
+debug = debug_bus;
 
 // IF STAGE
 wire [31:0] PC_out;
@@ -300,5 +305,11 @@ assign memory_out = memory_MEM[7:0];
     .select(ALU_WB),
     .c(ALU_FORWARD_WB)
 );
+
+assign debug_bus = PCADD_out ^ PCMuxOut ^ PC_out ^ inst_memory_IF 
+    ^ PC_ID ^ ALU_ID ^ imm_ID ^ rs2_val_ID ^ HZD_stall ^ bubble_EX 
+    ^ mux1_out ^ adder1_out ^ branch_unit_out_EX ^ MUX_SEL_B ^ ALU_INA
+    ^ mux3_out ^ ALU_INB ^ ALU_OUT_EX ^ rd_MEM ^ memory_MEM ^ rd_WB ^ ALU_FORWARD_WB;
+    
 
 endmodule
