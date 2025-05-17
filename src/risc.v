@@ -10,7 +10,7 @@ module risc(
 
 //debug 
 wire [7:0] debug_bus;
-debug = debug_bus;
+assign debug = debug_bus;
 
 // IF STAGE
 wire [31:0] PC_out;
