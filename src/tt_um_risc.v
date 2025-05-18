@@ -36,7 +36,7 @@ wire [7:0] debug_wire;
 // Output logic ensuring risc_output is always referenced
 assign uo_out = (debug_wire ^ risc_output) ? risc_output:debug_wire;
 
-wire _unused = &{ena,1'b1};
+wire _unused = &{ena,1'b0};
 
 // (Optional) If you want to drive uio_out too, do something like this:
 // assign uio_out = risc_output;  // only if uio_oe = 0xFF
